@@ -66,6 +66,55 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Example Data Table" duration="5">
+        <p>The table below shows one example list of patient data that might be displayed in an Hourly Rounding app.<br></p>
+<aside class="special"><p>Several data points will not be found direclty within the <code>Patient</code> resource, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the <code>Questionnaire</code> resource.</p>
+</aside>
+<table>
+<tr></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Patient</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Age</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Gender</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Location</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Last Visit</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Admit</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Chief Complaint</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>PCP</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Attending</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Johnson, Adam</p>
+</td><td colspan="1" rowspan="1"><p>76</p>
+</td><td colspan="1" rowspan="1"><p>M</p>
+</td><td colspan="1" rowspan="1"><p>704</p>
+</td><td colspan="1" rowspan="1"><p>2020-07-03 6:14:00</p>
+</td><td colspan="1" rowspan="1"><p>2020-07-02 12:34:56</p>
+</td><td colspan="1" rowspan="1"><p>Chest Pain</p>
+</td><td colspan="1" rowspan="1"><p>Waterhouse, Ben</p>
+</td><td colspan="1" rowspan="1"><p>James, Craig</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Thomson, Jeffer</p>
+</td><td colspan="1" rowspan="1"><p>79</p>
+</td><td colspan="1" rowspan="1"><p>M</p>
+</td><td colspan="1" rowspan="1"><p>705</p>
+</td><td colspan="1" rowspan="1"><p>2020-07-03 6:22:00</p>
+</td><td colspan="1" rowspan="1"><p>2020-07-01 21:09:54</p>
+</td><td colspan="1" rowspan="1"><p>Low Back Pain</p>
+</td><td colspan="1" rowspan="1"><p>Rush, Benjamin</p>
+</td><td colspan="1" rowspan="1"><p>James, Craig</p>
+</td></tr>
+</table>
+<aside class="warning"><p><strong>Some other more interesting data points to consider adding for extra credit might be:</strong></p>
+<ul>
+<li>Scheduled Departure</li>
+<li>New Lab Results Y/N</li>
+<li>Time Until Next Medication</li>
+<li>Pain Score 5-hour Trend<br></li>
+</ul>
+</aside>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Initial App" duration="10">
         <h2 is-upgraded>Instructions</h2>
 <p>Begin by cloning the <a href="https://github.com/barabo/demo-patient-lists" target="_blank">repository</a> that contains the skeletal app and installing it locally on your machine.</p>
@@ -78,55 +127,7 @@ npm install
 <p>The demo app is now ready to be started using this command:</p>
 <pre><code>npm run demo
 </code></pre>
-<p>To view the app, visit this URL: <a href="http://localhost:3001" target="_blank">http://localhost:3001</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Example Data Table" duration="5">
-        <p>The table below shows one example list of patient data that might be displayed in the rounding app.  Several data points will not be found within the <code>Patient</code> resource directly, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the <code>Questionnaire</code> resource.</p>
-<table>
-<tr></tr>
-<tr><td colspan="1" rowspan="1"><p><strong>Patient</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Age</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Gender</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Location</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Last Visit</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Admit</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Scheduled Departure</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Chief Complaint</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>PCP</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Attending</strong></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Johnson, Adam</p>
-</td><td colspan="1" rowspan="1"><p>76</p>
-</td><td colspan="1" rowspan="1"><p>M</p>
-</td><td colspan="1" rowspan="1"><p>704</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-03 6:14:00</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-02 12:34:56</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-05 7:30:00</p>
-</td><td colspan="1" rowspan="1"><p>Chest Pain</p>
-</td><td colspan="1" rowspan="1"><p>Waterhouse, Ben</p>
-</td><td colspan="1" rowspan="1"><p>James, Craig</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Thomson, Jeffer</p>
-</td><td colspan="1" rowspan="1"><p>79</p>
-</td><td colspan="1" rowspan="1"><p>M</p>
-</td><td colspan="1" rowspan="1"><p>705</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-03 6:22:00</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-01 21:09:54</p>
-</td><td colspan="1" rowspan="1"><p>2020-07-06 7:30:00</p>
-</td><td colspan="1" rowspan="1"><p>Low Back Pain</p>
-</td><td colspan="1" rowspan="1"><p>Rush, Benjamin</p>
-</td><td colspan="1" rowspan="1"><p>James, Craig</p>
-</td></tr>
-</table>
-<p>Some other more interesting data points to consider adding for extra credit might be:</p>
-<ul>
-<li>Latest Lab Results</li>
-<li>Next Medication Due</li>
-<li>Latest Pain Score</li>
-</ul>
+<p>To view the app, visit this URL: <a href="http://localhost:2020" target="_blank">http://localhost:2020</a></p>
 
 
       </google-codelab-step>

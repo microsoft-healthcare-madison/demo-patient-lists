@@ -91,6 +91,29 @@ Non-FHIR APIs provide access to this kind of information, but it's hard to write
 The FHIR Patient Lists will define a few key "list types" and ensure that FHIR-based apps can interact with lists as needed.  The initial focus is read-only access to lists.
 
 
+## Example Data Table
+Duration: 5
+
+The table below shows one example list of patient data that might be displayed in an Hourly Rounding app.
+<dt>positive</dt>
+<div>Several data points will not be found direclty within the `Patient` resource, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the `Questionnaire` resource.</div>
+
+
+| Patient          | Age     | Gender     | Location     | Last Visit         | Admit               | Chief Complaint     | PCP             | Attending     |
+|------------------|---------|------------|--------------|--------------------|---------------------|---------------------|-----------------|---------------|
+| **Patient**      | **Age** | **Gender** | **Location** | **Last Visit**     | **Admit**           | **Chief Complaint** | **PCP**         | **Attending** |
+| Johnson, Adam    | 76      | M          | 704          | 2020-07-03 6:14:00 | 2020-07-02 12:34:56 | Chest Pain          | Waterhouse, Ben | James, Craig  |
+| Thomson, Jeffer  | 79      | M          | 705          | 2020-07-03 6:22:00 | 2020-07-01 21:09:54 | Low Back Pain       | Rush, Benjamin  | James, Craig  |
+
+<dt>negative</dt>
+<div>**Some other more interesting data points to consider adding for extra credit might be:**
+  * Scheduled Departure
+  * New Lab Results Y/N
+  * Time Until Next Medication
+  * Pain Score 5-hour Trend
+</div>
+
+
 ## Initial App
 Duration: 10
 
@@ -111,22 +134,4 @@ The demo app is now ready to be started using this command:
 npm run demo
 ```
 
-To view the app, visit this URL: <http://localhost:3001>
-
-
-## Example Data Table
-Duration: 5
-
-The table below shows one example list of patient data that might be displayed in the rounding app.  Several data points will not be found within the `Patient` resource directly, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the `Questionnaire` resource.
-
-| Patient          | Age     | Gender     | Location     | Last Visit         | Admit               | Scheduled Departure     | Chief Complaint     | PCP             | Attending     |
-|------------------|---------|------------|--------------|--------------------|---------------------|-------------------------|---------------------|-----------------|---------------|
-| **Patient**      | **Age** | **Gender** | **Location** | **Last Visit**     | **Admit**           | **Scheduled Departure** | **Chief Complaint** | **PCP**         | **Attending** |
-| Johnson, Adam    | 76      | M          | 704          | 2020-07-03 6:14:00 | 2020-07-02 12:34:56 | 2020-07-05 7:30:00      | Chest Pain          | Waterhouse, Ben | James, Craig  |
-| Thomson, Jeffer  | 79      | M          | 705          | 2020-07-03 6:22:00 | 2020-07-01 21:09:54 | 2020-07-06 7:30:00      | Low Back Pain       | Rush, Benjamin  | James, Craig  |
-
-Some other more interesting data points to consider adding for extra credit might be:
-  * Latest Lab Results
-  * Next Medication Due
-  * Latest Pain Score
-
+To view the app, visit this URL: <http://localhost:2020>
