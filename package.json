@@ -1,1 +1,25 @@
-{}
+{
+  "name": "demo-patient-lists",
+  "version": "0.0.1",
+  "description": "A demo hospital rounds app using the FHIR Patient Lists API.",
+  "main": "index.html",
+  "scripts": {
+    "demo": "http-server -p 2020 -a localhost -o ./index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barabo/demo-patient-lists.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/barabo/demo-patient-lists/issues"
+  },
+  "homepage": "https://github.com/barabo/smart-auc-demo#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  },
+  "devDependencies": {}
+}

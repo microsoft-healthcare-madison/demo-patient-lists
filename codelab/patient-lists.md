@@ -125,7 +125,7 @@ mkdir -p ~/code/msft-fhir
 cd $_
 git clone git@github.com:barabo/demo-patient-lists.git
 cd demo-patient-lists
-npm install
+npm ci
 ```
 
 The demo app is now ready to be started using this command:
