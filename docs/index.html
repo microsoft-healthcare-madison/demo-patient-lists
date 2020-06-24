@@ -1,0 +1,90 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Build a Hospital Rounds App using the Patient Lists API</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="docs"
+                  title="Build a Hospital Rounds App using the Patient Lists API"
+                  environment="web"
+                  feedback-link="https://github.com/microsoft-healthcare-madison/demo-patient-lists/issues">
+    
+      <google-codelab-step label="Introduction" duration="2">
+        <h2 is-upgraded>Welcome, student!</h2>
+<p>This codelab is intended to teach you about the <a href="http://2020.argo.run" target="_blank">2020 Argonaut</a> initiative for <a href="https://github.com/argonautproject/patient-lists" target="_blank">Patient Lists</a> by walking you through a coding exercise that uses the new API.</p>
+<aside class="special"><h3 is-upgraded>Profile Audience</h3>
+<p>This guide is intended for programmers who wish to <em>learn by doing</em>.  You should already have a working knowledge of web programing, access to a development machine, and about <strong>1 to 2 total hours</strong> to dedicate to completing the whole codelab.<br><br>Your completion time will vary based on your familiarity with Javascript, web programming concepts, and the APIs in general.<br></p>
+</aside>
+<h3 is-upgraded>Prerequisites</h3>
+<p>This guide assumes you are already familiar with javascript and are comfortable with web programming concepts.  It also helps to know the basics of <code>git</code>, but there will be example commands throughout for convenience.  The provided initial codebase uses <code>javascript</code>, <code>node</code>, <code>nvm</code>, <code>npm</code>, and <code>express</code> - so some prior experience with those tools will be helpful, but not required.  JavaScript in the browser and in Node.js, and the express Web framework for Node.js</p>
+<h3 is-upgraded>Contributing</h3>
+<p>As always, you are free to re-write entire portions of the code in whatever framework you like (and please feel free to share your work with us)!</p>
+<p>The codelab has a wiki which should help you decide how to best contribute:<br><a href="https://github.com/microsoft-healthcare-madison/demo-patient-lists/wiki" target="_blank">https://github.com/microsoft-healthcare-madison/demo-patient-lists/wiki</a></p>
+<p>Also, take notice of the <a href="https://github.com/microsoft-healthcare-madison/demo-patient-lists/issues" target="_blank">Report a mistake</a> link that appears in the lower left corner of each page!</p>
+<h3 is-upgraded>Major Milestones</h3>
+<p>You will start with an already-implemented app that displays an empty table of patients that will be visited by a doctor who is walking rounds in a hospital.</p>
+<ul>
+<li>v1: Provide a remote FHIR server to pull patients from, displaying the default list of patients.</li>
+<li>v2: Implement filters, restricting the patient list to meet specified criteria.</li>
+<li>v3: Include other patient details in the displayed table, fetching it from related resources using a <a href="https://www.hl7.org/fhir/questionnaire.html" target="_blank"><br>Questionnaire</a>.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Patient Lists" duration="2">
+        <h2 is-upgraded>Patient Lists API</h2>
+<p>Provider-facing apps often need to know things like:</p>
+<ul>
+<li>Who are the patients I&#39;m seeing today?</li>
+<li>Who are the patients I&#39;m responsible for in the hospital right now?</li>
+<li>Who are the patients in this ward?</li>
+</ul>
+<aside class="warning"><h3 is-upgraded>Vendor-specific APIs</h3>
+<p>Non-FHIR APIs provide access to this kind of information, but it&#39;s hard to write a cross-platform app for patient management without a standard approach.<br></p>
+</aside>
+<p>The FHIR Patient Lists will define a few key &#34;list types&#34; and ensure that FHIR-based apps can interact with lists as needed.  The initial focus is read-only access to lists.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Initial App" duration="10">
+        <h2 is-upgraded>Instructions</h2>
+<p>Begin by cloning the repository that contains the skeletal app and installing it locally on your machine.</p>
+<pre><code>cd ~
+mkdir -p code/msft-madison
+cd $_
+git clone git@github.com:barabo/demo-patient-lists.git
+cd demo-patient-lists
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>
