@@ -95,7 +95,7 @@ The FHIR Patient Lists will define a few key "list types" and ensure that FHIR-b
 Duration: 10
 
 ### Instructions
-Begin by cloning the repository that contains the skeletal app and installing it locally on your machine.
+Begin by cloning the [repository](https://github.com/barabo/demo-patient-lists) that contains the skeletal app and installing it locally on your machine.
 
 ```bash
 mkdir -p ~/code/msft-fhir
@@ -104,3 +104,29 @@ git clone git@github.com:barabo/demo-patient-lists.git
 cd demo-patient-lists
 npm install
 ```
+
+The demo app is now ready to be started using this command:
+
+```sh
+npm run demo
+```
+
+To view the app, visit this URL: <http://localhost:3001>
+
+
+## Example Data Table
+Duration: 5
+
+The table below shows one example list of patient data that might be displayed in the rounding app.  Several data points will not be found within the `Patient` resource directly, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the `Questionnaire` resource.
+
+| Patient          | Age     | Gender     | Location     | Last Visit         | Admit               | Scheduled Departure     | Chief Complaint     | PCP             | Attending     |
+|------------------|---------|------------|--------------|--------------------|---------------------|-------------------------|---------------------|-----------------|---------------|
+| **Patient**      | **Age** | **Gender** | **Location** | **Last Visit**     | **Admit**           | **Scheduled Departure** | **Chief Complaint** | **PCP**         | **Attending** |
+| Johnson, Adam    | 76      | M          | 704          | 2020-07-03 6:14:00 | 2020-07-02 12:34:56 | 2020-07-05 7:30:00      | Chest Pain          | Waterhouse, Ben | James, Craig  |
+| Thomson, Jeffer  | 79      | M          | 705          | 2020-07-03 6:22:00 | 2020-07-01 21:09:54 | 2020-07-06 7:30:00      | Low Back Pain       | Rush, Benjamin  | James, Craig  |
+
+Some other more interesting data points to consider adding for extra credit might be:
+  * Latest Lab Results
+  * Next Medication Due
+  * Latest Pain Score
+
