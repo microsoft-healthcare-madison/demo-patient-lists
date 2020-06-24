@@ -98,9 +98,9 @@ Duration: 10
 Begin by cloning the repository that contains the skeletal app and installing it locally on your machine.
 
 ```bash
-cd ~
-mkdir -p code/msft-madison
+mkdir -p ~/code/msft-fhir
 cd $_
 git clone git@github.com:barabo/demo-patient-lists.git
 cd demo-patient-lists
+npm install
 ```
