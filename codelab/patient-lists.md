@@ -135,3 +135,9 @@ npm run demo
 ```
 
 To view the app, visit this URL: <http://localhost:2020>
+
+
+## Group Resource
+Duration: 10
+
+The Patient Lists API takes advantage of the [Group](https://www.hl7.org/fhir/group.html) resource to represent a collection of patients with something in common, as opposed to a [List](https://www.hl7.org/fhir/list.html), which is a manually curated collection.

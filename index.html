@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patient Lists API Demo</title>
+</head>
+<body>
+    <table id="patients" border=1>
+        <tr>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>Last Visit</th>
+            <th>Admin</th>
+            <th>Chief Complaint</th>
+            <th>PCP</th>
+            <th>Attending</th>
+        </tr>
+    </table>
+    <script>
+        fetch('data/person.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (bundle) {
+                unbundle(bundle);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+
+        function unbundle(bundle) {
+            var patients = document.getElementById("patients");
+            console.log(bundle)  // XXX
+            for (var i = 0; i < bundle.entry.length; i++) {
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = "Lastname, Firstname";
+                // TODO: add the other elements.
+                patients.appendChild(tr);
+            }
+        }
+    </script>
+</body>
+</html>

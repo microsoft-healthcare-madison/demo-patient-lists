@@ -1,0 +1,1011 @@
+{
+  "resourceType": "Bundle",
+  "id": "e8734113-e76e-40bf-a7d6-6febc081410c",
+  "meta": {
+    "lastUpdated": "2020-06-24T15:42:03.864+00:00"
+  },
+  "type": "searchset",
+  "total": 463,
+  "link": [ {
+    "relation": "self",
+    "url": "http://hapi.fhir.org/baseR4/Group?_format=json"
+  }, {
+    "relation": "next",
+    "url": "http://hapi.fhir.org/baseR4?_getpages=e8734113-e76e-40bf-a7d6-6febc081410c&_getpagesoffset=20&_count=20&_format=json&_pretty=true&_bundletype=searchset"
+  } ],
+  "entry": [ {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/JAW7548",
+    "resource": {
+      "resourceType": "Group",
+      "id": "JAW7548",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T21:06:58.054+00:00",
+        "source": "#Bq36crXBE8V32hfv"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-4753",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/50090"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/DPE5150",
+    "resource": {
+      "resourceType": "Group",
+      "id": "DPE5150",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T21:05:41.916+00:00",
+        "source": "#2hoekglzFs1gKsDd"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-3960",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/48157"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/EVW688",
+    "resource": {
+      "resourceType": "Group",
+      "id": "EVW688",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T21:02:14.245+00:00",
+        "source": "#jGtYxxCo1WSumjaz"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-4652",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/50090"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/FCQ8361",
+    "resource": {
+      "resourceType": "Group",
+      "id": "FCQ8361",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T21:00:43.619+00:00",
+        "source": "#hejHTmAiTlUvZqtd"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-355",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/48511"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/VZD1972",
+    "resource": {
+      "resourceType": "Group",
+      "id": "VZD1972",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T20:57:59.551+00:00",
+        "source": "#hIWGNz6DPJdH5N3n"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-5405",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/50090"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/VGP9324",
+    "resource": {
+      "resourceType": "Group",
+      "id": "VGP9324",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-11T20:54:10.687+00:00",
+        "source": "#Gjt34ihW2ntiRDMu"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-5291",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/39917"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/48512"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/dd-linkedbyme-10102-1177579",
+    "resource": {
+      "resourceType": "Group",
+      "id": "dd-linkedbyme-10102-1177579",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-01T08:39:37.010+00:00",
+        "source": "#VhurzPsEikcdhyWu",
+        "tag": [ {
+          "code": "10102"
+        } ]
+      },
+      "type": "practitioner",
+      "actual": true,
+      "code": {
+        "coding": [ {
+          "system": "ValueSet/group-code",
+          "code": "dd-linkedbyme",
+          "display": "Doctors whose patients I can see"
+        } ]
+      },
+      "managingEntity": {
+        "reference": "Practitioner/1177579"
+      },
+      "member": [ {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "1",
+              "display": "Outpatient"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175616"
+        }
+      }, {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "2",
+              "display": "Inpatient & Emergency care"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175615"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/dd-linkedbyme-10102-1176470",
+    "resource": {
+      "resourceType": "Group",
+      "id": "dd-linkedbyme-10102-1176470",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-06-01T08:34:06.309+00:00",
+        "source": "#H4BBPpjPFs61hNpc",
+        "tag": [ {
+          "code": "10102"
+        } ]
+      },
+      "type": "practitioner",
+      "actual": true,
+      "code": {
+        "coding": [ {
+          "system": "ValueSet/group-code",
+          "code": "dd-linkedbyme",
+          "display": "Doctors whose patients I can see"
+        } ]
+      },
+      "managingEntity": {
+        "reference": "Practitioner/1168181"
+      },
+      "member": [ {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "1",
+              "display": "Outpatient"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175616"
+        }
+      }, {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "2",
+              "display": "Inpatient & Emergency care"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175615"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1176470",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1176470",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-30T19:07:46.433+00:00",
+        "source": "#LOj6ye81AIuYHIgs",
+        "tag": [ {
+          "code": "10102"
+        } ]
+      },
+      "type": "practitioner",
+      "actual": true,
+      "code": {
+        "coding": [ {
+          "system": "ValueSet/group-code",
+          "code": "dd-byme",
+          "display": "Other doctors patients seen by me"
+        } ]
+      },
+      "managingEntity": {
+        "reference": "Practitioner/1168181"
+      },
+      "member": [ {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "1",
+              "display": "Outpatient"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175616"
+        }
+      }, {
+        "extension": [ {
+          "url": "Medmantra/dxc-mm-group-patienttype",
+          "valueCodeableConcept": {
+            "coding": [ {
+              "system": "ValueSet/group-patienttype",
+              "code": "2",
+              "display": "Inpatient & Emergency care"
+            } ]
+          }
+        } ],
+        "entity": {
+          "reference": "Practitioner/1175615"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1171742",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1171742",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-22T19:24:19.942+00:00",
+        "source": "#fuO8ClPlqaD4tCNx"
+      },
+      "identifier": [ {
+        "system": "http://example.org",
+        "value": "dba0a9f9-82cb-4d42-ad92-3250756a9420"
+      } ],
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "ICU List",
+      "managingEntity": {
+        "reference": "Organization/example-organization-2",
+        "display": "Dairyland Hospital"
+      },
+      "member": [ {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "456"
+          },
+          "display": "Name = Daniel Crimson (MRN = 456)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "567"
+          },
+          "display": "Name = Peter Silie (MRN = 567)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "901"
+          },
+          "display": "Name = Caleb Cushing (MRN = 901)"
+        },
+        "inactive": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1164322",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1164322",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-12T07:13:44.203+00:00",
+        "source": "#InpjJeEXxOMlujQy"
+      },
+      "type": "person",
+      "actual": true,
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C3809",
+            "display": "Neuroendokriner Tumor"
+          } ]
+        },
+        "valueBoolean": true,
+        "exclude": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1164320",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1164320",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-12T07:13:44.203+00:00",
+        "source": "#InpjJeEXxOMlujQy"
+      },
+      "type": "person",
+      "actual": true,
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C2852",
+            "display": "Adenokarzinom"
+          } ]
+        },
+        "valueBoolean": true,
+        "exclude": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1164316",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1164316",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-12T07:13:44.203+00:00",
+        "source": "#InpjJeEXxOMlujQy"
+      },
+      "type": "person",
+      "actual": true,
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C2916",
+            "display": "Karzinom"
+          }, {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C3780",
+            "display": "Großzelliges Karzinom"
+          }, {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C3868",
+            "display": "GIST"
+          } ]
+        },
+        "valueBoolean": true,
+        "exclude": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1164324",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1164324",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-12T07:13:44.203+00:00",
+        "source": "#InpjJeEXxOMlujQy"
+      },
+      "type": "person",
+      "actual": true,
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C2852",
+            "display": "Adenokarzinom"
+          } ]
+        },
+        "valueBoolean": true,
+        "exclude": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/1164318",
+    "resource": {
+      "resourceType": "Group",
+      "id": "1164318",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-12T07:13:44.203+00:00",
+        "source": "#InpjJeEXxOMlujQy"
+      },
+      "type": "person",
+      "actual": true,
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C2852",
+            "display": "Adenokarzinom"
+          }, {
+            "system": "http://fhir.de/CodeSystem/dimdi/icd-o-3",
+            "code": "C3727",
+            "display": "Adenosquamös"
+          } ]
+        },
+        "valueBoolean": true,
+        "exclude": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/ZZL6371",
+    "resource": {
+      "resourceType": "Group",
+      "id": "ZZL6371",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-08T21:58:10.737+00:00",
+        "source": "#DZFBqjcmbQgPKYad"
+      },
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "TestGroup-1176",
+      "member": [ {
+        "entity": {
+          "reference": "Patient/585837"
+        }
+      }, {
+        "entity": {
+          "reference": "Patient/585834"
+        }
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/group-active-today-20200505060432348158",
+    "resource": {
+      "resourceType": "Group",
+      "id": "group-active-today-20200505060432348158",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-05T06:13:04.545+00:00",
+        "source": "#3lhPEqH7XWzrmPPO"
+      },
+      "identifier": [ {
+        "system": "http://example.org",
+        "value": "group-active-today-20200505060432348158"
+      } ],
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "active-today",
+      "managingEntity": {
+        "reference": "Organization/example-organization-2",
+        "display": "US Core Example Organization 2"
+      },
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://loinc.org",
+            "code": "LA16666-2",
+            "display": "Active"
+          } ],
+          "text": "Active"
+        },
+        "valueBoolean": true,
+        "exclude": false,
+        "period": {
+          "start": "2020-05-04",
+          "end": "2020-05-05"
+        }
+      } ],
+      "member": [ {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "456"
+          },
+          "display": "Name = Daniel Crimson (MRN = 456)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "567"
+          },
+          "display": "Name = Elizabeth Green (MRN = 567)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "689"
+          },
+          "display": "Name = Frederick Gray (MRN = 689)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "890"
+          },
+          "display": "Name = Greg Orange (MRN = 890)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "901"
+          },
+          "display": "Name = Harriet Silver (MRN = 901)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "902"
+          },
+          "display": "Name = Imelda Gold (MRN = 902)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "903"
+          },
+          "display": "Name = Jack White (MRN = 903)"
+        },
+        "inactive": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/group-active-None-20200505060320011289",
+    "resource": {
+      "resourceType": "Group",
+      "id": "group-active-None-20200505060320011289",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-05T06:03:20.933+00:00",
+        "source": "#03Ql8vxy4HhRTyNg"
+      },
+      "identifier": [ {
+        "system": "http://example.org",
+        "value": "group-active-None-20200505060320011289"
+      } ],
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "active-None",
+      "managingEntity": {
+        "reference": "Organization/example-organization-2",
+        "display": "US Core Example Organization 2"
+      },
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://loinc.org",
+            "code": "LA16666-2",
+            "display": "Active"
+          } ],
+          "text": "Active"
+        },
+        "valueBoolean": true,
+        "exclude": false,
+        "period": {
+          "start": "2020-05-03",
+          "end": "2020-05-05"
+        }
+      } ],
+      "member": [ {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "345"
+          },
+          "display": "Name = Colleen Blue (MRN = 345)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "456"
+          },
+          "display": "Name = Daniel Crimson (MRN = 456)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "567"
+          },
+          "display": "Name = Elizabeth Green (MRN = 567)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "689"
+          },
+          "display": "Name = Frederick Gray (MRN = 689)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "890"
+          },
+          "display": "Name = Greg Orange (MRN = 890)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "901"
+          },
+          "display": "Name = Harriet Silver (MRN = 901)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "902"
+          },
+          "display": "Name = Imelda Gold (MRN = 902)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "903"
+          },
+          "display": "Name = Jack White (MRN = 903)"
+        },
+        "inactive": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/group-practitioner-today-20200505055520658789",
+    "resource": {
+      "resourceType": "Group",
+      "id": "group-practitioner-today-20200505055520658789",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-05T05:56:40.454+00:00",
+        "source": "#owUUte0Cp3lkQaNv"
+      },
+      "identifier": [ {
+        "system": "http://example.org",
+        "value": "group-practitioner-today-20200505055520658789"
+      } ],
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "practitioner-today",
+      "managingEntity": {
+        "reference": "Organization/example-organization-2",
+        "display": "US Core Example Organization 2"
+      },
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://hl7.org/fhir/resource-types",
+            "code": "Practitioner",
+            "display": "Practitioner"
+          } ],
+          "text": "Practitioner"
+        },
+        "valueReference": {
+          "reference": "Practitioner/smith",
+          "display": "Doctor  Smith"
+        },
+        "exclude": false,
+        "period": {
+          "start": "2020-05-04",
+          "end": "2020-05-05"
+        }
+      } ],
+      "member": [ {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "567"
+          },
+          "display": "Name = Elizabeth Green (MRN = 567)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "890"
+          },
+          "display": "Name = Greg Orange (MRN = 890)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "902"
+          },
+          "display": "Name = Imelda Gold (MRN = 902)"
+        },
+        "inactive": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  }, {
+    "fullUrl": "http://hapi.fhir.org/baseR4/Group/group-practitioner-20200505053059678754",
+    "resource": {
+      "resourceType": "Group",
+      "id": "group-practitioner-20200505053059678754",
+      "meta": {
+        "versionId": "1",
+        "lastUpdated": "2020-05-05T05:31:00.695+00:00",
+        "source": "#kSe9gbqQZoZdXaR2"
+      },
+      "identifier": [ {
+        "system": "http://example.org",
+        "value": "group-practitioner-20200505053059678754"
+      } ],
+      "active": true,
+      "type": "person",
+      "actual": true,
+      "name": "practitioner",
+      "managingEntity": {
+        "reference": "Organization/example-organization-2",
+        "display": "US Core Example Organization 2"
+      },
+      "characteristic": [ {
+        "code": {
+          "coding": [ {
+            "system": "http://hl7.org/fhir/resource-types",
+            "code": "Practitioner",
+            "display": "Practitioner"
+          } ],
+          "text": "Practitioner"
+        },
+        "valueReference": {
+          "reference": "Practitioner/smith",
+          "display": "Doctor  Smith"
+        },
+        "exclude": false,
+        "period": {
+          "start": "2020-05-02",
+          "end": "2020-05-04"
+        }
+      } ],
+      "member": [ {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "123"
+          },
+          "display": "Name = Amy Brown (MRN = 123)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "234"
+          },
+          "display": "Name = Bert Black (MRN = 234)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "345"
+          },
+          "display": "Name = Colleen Blue (MRN = 345)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "456"
+          },
+          "display": "Name = Daniel Crimson (MRN = 456)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "567"
+          },
+          "display": "Name = Elizabeth Green (MRN = 567)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "689"
+          },
+          "display": "Name = Frederick Gray (MRN = 689)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "890"
+          },
+          "display": "Name = Greg Orange (MRN = 890)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "901"
+          },
+          "display": "Name = Harriet Silver (MRN = 901)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "902"
+          },
+          "display": "Name = Imelda Gold (MRN = 902)"
+        },
+        "inactive": false
+      }, {
+        "entity": {
+          "identifier": {
+            "system": "http://example.org",
+            "value": "903"
+          },
+          "display": "Name = Jack White (MRN = 903)"
+        },
+        "inactive": false
+      } ]
+    },
+    "search": {
+      "mode": "match"
+    }
+  } ]
+}
