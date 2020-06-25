@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+  var SERVER = "http://localhost:2019"
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +26,7 @@
         </tr>
     </table>
     <script>
+      console.log(SERVER);
         fetch('data/person.json')
             .then(function (response) {
                 return response.json();
