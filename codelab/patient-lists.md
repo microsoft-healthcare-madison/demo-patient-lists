@@ -3,7 +3,7 @@ id: docs
 categories: patient-lists argonaut
 environments: Web
 status: Draft
-feedback link: https://github.com/microsoft-healthcare-madison/demo-patient-lists/issues
+feedback link: https://github.com/barabo/demo-patient-lists/issues
 tags: patient-lists fhir argonaut
 authors: Carl Anderson
 
@@ -135,6 +135,17 @@ npm run demo
 ```
 
 To view the app, visit this URL: <http://localhost:2020>
+
+
+## Work In Progress
+Duration: 2
+
+<dt>negative</dt>
+<div>Most servers do not yet support the Patient Lists API!</div>
+
+This codelab provides static 'canned' server responses in the form of flat json files and a mock server interface which simulates an operational server.  There will be an option to connect to a real server once they become more widely available.
+
+TODO: provide more details on how this works and how it can be configured
 
 
 ## Group Resource
