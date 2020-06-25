@@ -258,6 +258,7 @@ Duration: 0
   * Populate Last Visited timestamp.
   * Populate PCP and Attending providers.
   * Populate Chief Complaint.
+  * App Filters
 
 ### Bonus
 Finally, once the mechanics are better understood, the option of having a Questionnaire and response suggested in the Group extensions should be explored in the codelab.
