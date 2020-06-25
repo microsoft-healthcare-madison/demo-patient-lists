@@ -42,9 +42,9 @@
 <h3 is-upgraded>Major Milestones</h3>
 <p>You will start with an already-implemented app that displays an empty table of patients that will be visited by a doctor who is walking rounds in a hospital.</p>
 <ul>
-<li>v1: Provide a remote FHIR server to pull patients from, displaying the default list of patients.</li>
-<li>v2: Implement filters, restricting the patient list to meet specified criteria.</li>
-<li>v3: Include other patient details in the displayed table, fetching it from related resources using a <a href="https://www.hl7.org/fhir/questionnaire.html" target="_blank"><br>Questionnaire</a>.</li>
+<li>v1: Read patient data from either a FHIR server or from flat files, displaying the list of patients.</li>
+<li>v2: Include other patient details in the displayed table, fetching it from related resources using several parallel queries.</li>
+<li>v3: Implement filters, restricting the patient list to meet specified criteria.</li>
 </ul>
 
 
@@ -62,13 +62,16 @@
 <p>Non-FHIR APIs provide access to this kind of information, but it&#39;s hard to write a cross-platform app for patient management without a standard approach.<br></p>
 </aside>
 <p>The FHIR Patient Lists will define a few key &#34;list types&#34; and ensure that FHIR-based apps can interact with lists as needed.  The initial focus is read-only access to lists.</p>
+<h2 is-upgraded>EXERCISE: Open the Docs</h2>
+<aside class="special"><p>Refer to the (currently DRAFT) documentation here: <a href="https://github.com/argonautproject/patient-lists" target="_blank">https://github.com/argonautproject/patient-lists</a></p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Example Data Table" duration="5">
         <p>The table below shows one example list of patient data that might be displayed in an Hourly Rounding app.<br></p>
-<aside class="special"><p>Several data points will not be found direclty within the <code>Patient</code> resource, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the <code>Questionnaire</code> resource.</p>
+<aside class="special"><p>Several data points shown below will not be found direclty within the <code>Patient</code> resource, and must be gathered individually.  At first we will query for these using a naive approach; later, we will explore a method to do this this as efficiently as possible using the <code>Questionnaire</code> resource, if the server supports it.</p>
 </aside>
 <table>
 <tr></tr>
@@ -76,7 +79,7 @@
 </td><td colspan="1" rowspan="1"><p><strong>Age</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>Gender</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>Location</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Last Visit</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Last Visited</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>Admit</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>Chief Complaint</strong></p>
 </td><td colspan="1" rowspan="1"><p><strong>PCP</strong></p>
@@ -115,7 +118,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Initial App" duration="10">
+      <google-codelab-step label="Codelab Setup" duration="10">
         <h2 is-upgraded>Instructions</h2>
 <p>Begin by cloning the <a href="https://github.com/barabo/demo-patient-lists" target="_blank">repository</a> that contains the skeletal app and installing it locally on your machine.</p>
 <pre><code>mkdir -p ~/code/msft-fhir
@@ -127,22 +130,117 @@ npm ci
 <p>The demo app is now ready to be started using this command:</p>
 <pre><code>npm run demo
 </code></pre>
-<p>To view the app, visit this URL: <a href="http://localhost:2020" target="_blank">http://localhost:2020</a></p>
+<h2 is-upgraded>EXERCISE: View the App</h2>
+<aside class="special"><p>To view the app, visit this URL: <a href="http://localhost:2020" target="_blank">http://localhost:2020</a></p>
+</aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Work In Progress" duration="2">
-        <aside class="warning"><p>Most servers do not yet support the Patient Lists API!</p>
+      <google-codelab-step label="Server Support" duration="2">
+        <aside class="warning"><p><strong>As of June, 2020 - most servers do not yet support the Patient Lists API!</strong></p>
 </aside>
-<p>This codelab provides static ‘canned&#39; server responses in the form of flat json files and a mock server interface which simulates an operational server.  There will be an option to connect to a real server once they become more widely available.</p>
-<p>TODO: provide more details on how this works and how it can be configured</p>
+<aside class="special"><p>This codelab provides static ‘canned&#39; server responses in the form of flat json files and a mock server interface which simulates an operational server.  You can do this exercise with or without a real server!</p>
+</aside>
+<h2 is-upgraded>Server Compliance Test</h2>
+<p>If you would like to <em>test</em> your server for Patient List API compliance, visit this link:<br></p>
+<aside class="warning"><p>TODO(carl) - link to the server tester site when it&#39;s available (work in progress).</p>
+</aside>
+<h2 is-upgraded>Required Server Capabilities</h2>
+<p>In summary, the required server capabilities are:</p>
+<ul>
+<li>Group resource support.</li>
+</ul>
+<h2 is-upgraded>EXERCISE: Configure the Source Data</h2>
+<aside class="special"><p>The remainder of this codelab assumes you have a common source of data.  You may either configure the app to use your own server or to read from provided files.</p>
+<h3 is-upgraded>OPTION 1: Genuine Server</h3>
+<p>If you intend to bring your own server for this exercise, please update <code>index.html</code> to use your server URL:</p>
+<pre><code>&lt;script&gt;
+  var SERVER = &#34;http://localhost:2019&#34;  // TODO: update this with your own URL
+&lt;/script&gt;
+</code></pre>
+<h3 is-upgraded>OPTION 2: Mock Server</h3>
+<p>Launch the local server which will provide canned output on <a href="http://localhost:2019" target="_blank">http://localhost:2019</a>.</p>
+<pre><code>npm start server
+</code></pre>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Group Resource" duration="10">
         <p>The Patient Lists API takes advantage of the <a href="https://www.hl7.org/fhir/group.html" target="_blank">Group</a> resource to represent a collection of patients with something in common, as opposed to a <a href="https://www.hl7.org/fhir/list.html" target="_blank">List</a>, which is a manually curated collection.</p>
+<h2 is-upgraded>EXERCISE: Fetch all the Groups</h2>
+<aside class="special"><p>Begin by adding code to fetch the groups from your source data.</p>
+<pre><code>    &lt;table id=&#34;patients&#34; border=1&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Patient&lt;/th&gt;
+            &lt;th&gt;Age&lt;/th&gt;
+            &lt;th&gt;Gender&lt;/th&gt;
+            &lt;th&gt;Location&lt;/th&gt;
+            &lt;th&gt;Last Visited&lt;/th&gt;
+            &lt;th&gt;Admit&lt;/th&gt;
+            &lt;th&gt;Chief Complaint&lt;/th&gt;
+            &lt;th&gt;PCP&lt;/th&gt;
+            &lt;th&gt;Attending&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;script&gt;
+        fetch(SERVER + &#39;/Group&#39;)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (bundle) {
+                unbundle(bundle);
+            })
+            .catch(function (err) {
+                console.log(&#39;error: &#39; + err);
+            });
+
+        function unbundle(bundle) {
+            var patients = document.getElementById(&#34;patients&#34;);
+            for (var i = 0; i &lt; bundle.entry.length; i++) {
+                var tr = document.createElement(&#34;tr&#34;);
+                var td = document.createElement(&#34;td&#34;);
+                tr.appendChild(td);
+                td.innerHTML = &#34;Lastname, Firstname&#34;;
+                // TODO: add the other elements.
+                patients.appendChild(tr);
+            }
+            // TODO: also handle paging of results in the bundle.
+        }
+    &lt;/script&gt;
+</code></pre>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="META TODO" duration="0">
+        <aside class="special"><pre><code>  0/ - This section details the plan for this codelab and is subject to change!
+ &lt;Y
+ / \
+</code></pre>
+</aside>
+<h2 is-upgraded>Administrative</h2>
+<ul>
+<li>Move this repo over to the microsoft-healthcare-madison team page (and update all links).</li>
+<li>Convert this section into github issues for work tracking and assignment (if anyone else is interested in helping)</li>
+</ul>
+<h2 is-upgraded>Supporting materials</h2>
+<ul>
+<li>I need to write a dumb local ‘fhir&#39; server which will serve up canned / static files on port 2019.</li>
+</ul>
+<h2 is-upgraded>Remaining sections / exercises</h2>
+<ul>
+<li>Populate Location</li>
+<li>Populate Admit date</li>
+<li>Populate Last Visited timestamp.</li>
+<li>Populate PCP and Attending providers.</li>
+<li>Populate Chief Complaint.</li>
+</ul>
+<h2 is-upgraded>Bonus</h2>
+<p>Finally, once the mechanics are better understood, the option of having a Questionnaire and response suggested in the Group extensions should be explored in the codelab.</p>
 
 
       </google-codelab-step>

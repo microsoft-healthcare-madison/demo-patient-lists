@@ -67,9 +67,9 @@ Also, take notice of the [Report a mistake](https://github.com/microsoft-healthc
 
 You will start with an already-implemented app that displays an empty table of patients that will be visited by a doctor who is walking rounds in a hospital.
 
-- v1: Provide a remote FHIR server to pull patients from, displaying the default list of patients.
-- v2: Implement filters, restricting the patient list to meet specified criteria.
-- v3: Include other patient details in the displayed table, fetching it from related resources using a [`Questionnaire`](https://www.hl7.org/fhir/questionnaire.html).
+- v1: Read patient data from either a FHIR server or from flat files, displaying the list of patients.
+- v2: Include other patient details in the displayed table, fetching it from related resources using several parallel queries.
+- v3: Implement filters, restricting the patient list to meet specified criteria.
 
 
 ## Patient Lists
@@ -90,18 +90,22 @@ Non-FHIR APIs provide access to this kind of information, but it's hard to write
 
 The FHIR Patient Lists will define a few key "list types" and ensure that FHIR-based apps can interact with lists as needed.  The initial focus is read-only access to lists.
 
+### EXERCISE: Open the Docs
+<dt>positive</dt>
+<div>Refer to the (currently DRAFT) documentation here: <https://github.com/argonautproject/patient-lists></div>
+
 
 ## Example Data Table
 Duration: 5
 
 The table below shows one example list of patient data that might be displayed in an Hourly Rounding app.
 <dt>positive</dt>
-<div>Several data points will not be found direclty within the `Patient` resource, and must be gathered indirectly; we will explore a method to do this this as efficiently as possible using the `Questionnaire` resource.</div>
+<div>Several data points shown below will not be found direclty within the `Patient` resource, and must be gathered individually.  At first we will query for these using a naive approach; later, we will explore a method to do this this as efficiently as possible using the `Questionnaire` resource, if the server supports it.</div>
 
 
-| Patient          | Age     | Gender     | Location     | Last Visit         | Admit               | Chief Complaint     | PCP             | Attending     |
+| Patient          | Age     | Gender     | Location     | Last Visited       | Admit               | Chief Complaint     | PCP             | Attending     |
 |------------------|---------|------------|--------------|--------------------|---------------------|---------------------|-----------------|---------------|
-| **Patient**      | **Age** | **Gender** | **Location** | **Last Visit**     | **Admit**           | **Chief Complaint** | **PCP**         | **Attending** |
+| **Patient**      | **Age** | **Gender** | **Location** | **Last Visited**   | **Admit**           | **Chief Complaint** | **PCP**         | **Attending** |
 | Johnson, Adam    | 76      | M          | 704          | 2020-07-03 6:14:00 | 2020-07-02 12:34:56 | Chest Pain          | Waterhouse, Ben | James, Craig  |
 | Thomson, Jeffer  | 79      | M          | 705          | 2020-07-03 6:22:00 | 2020-07-01 21:09:54 | Low Back Pain       | Rush, Benjamin  | James, Craig  |
 
@@ -114,7 +118,7 @@ The table below shows one example list of patient data that might be displayed i
 </div>
 
 
-## Initial App
+## Codelab Setup
 Duration: 10
 
 ### Instructions
@@ -134,21 +138,126 @@ The demo app is now ready to be started using this command:
 npm run demo
 ```
 
-To view the app, visit this URL: <http://localhost:2020>
+### EXERCISE: View the App
+<dt>positive</dt>
+<div>To view the app, visit this URL: <http://localhost:2020></div>
 
 
-## Work In Progress
+## Server Support
 Duration: 2
 
 <dt>negative</dt>
-<div>Most servers do not yet support the Patient Lists API!</div>
+<div>**As of June, 2020 - most servers do not yet support the Patient Lists API!**</div>
 
-This codelab provides static 'canned' server responses in the form of flat json files and a mock server interface which simulates an operational server.  There will be an option to connect to a real server once they become more widely available.
+<dt>positive</dt>
+<div>This codelab provides static 'canned' server responses in the form of flat json files and a mock server interface which simulates an operational server.  You can do this exercise with or without a real server!</div>
 
-TODO: provide more details on how this works and how it can be configured
+### Server Compliance Test
+If you would like to *test* your server for Patient List API compliance, visit this link:
+<dt>negative</dt>
+<div>TODO(carl) - link to the server tester site when it's available (work in progress).</div>
+
+### Required Server Capabilities
+In summary, the required server capabilities are:
+
+* Group resource support.
+
+### EXERCISE: Configure the Source Data
+<dt>positive</dt>
+<div>The remainder of this codelab assumes you have a common source of data.  You may either configure the app to use your own server or to read from provided files.
+
+#### OPTION 1: Genuine Server
+If you intend to bring your own server for this exercise, please update `index.html` to use your server URL:
+```js
+<script>
+  var SERVER = "http://localhost:2019"  // TODO: update this with your own URL
+</script>
+```
+
+#### OPTION 2: Mock Server
+Launch the local server which will provide canned output on <http://localhost:2019>.
+```bash
+npm start server
+```
+</div>
 
 
 ## Group Resource
 Duration: 10
 
 The Patient Lists API takes advantage of the [Group](https://www.hl7.org/fhir/group.html) resource to represent a collection of patients with something in common, as opposed to a [List](https://www.hl7.org/fhir/list.html), which is a manually curated collection.
+
+### EXERCISE: Fetch all the Groups
+<dt>positive</dt>
+<div>Begin by adding code to fetch the groups from your source data.
+```js
+    <table id="patients" border=1>
+        <tr>
+            <th>Patient</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>Last Visited</th>
+            <th>Admit</th>
+            <th>Chief Complaint</th>
+            <th>PCP</th>
+            <th>Attending</th>
+        </tr>
+    </table>
+    <script>
+        fetch(SERVER + '/Group')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (bundle) {
+                unbundle(bundle);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+
+        function unbundle(bundle) {
+            var patients = document.getElementById("patients");
+            for (var i = 0; i < bundle.entry.length; i++) {
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = "Lastname, Firstname";
+                // TODO: add the other elements.
+                patients.appendChild(tr);
+            }
+            // TODO: also handle paging of results in the bundle.
+        }
+    </script>
+```
+</div>
+
+
+## META TODO
+Duration: 0
+
+<dt>positive</dt>
+<div>
+```
+  0/ - This section details the plan for this codelab and is subject to change!
+ <Y
+ / \
+ ```
+ </div>
+
+### Administrative
+  * Move this repo over to the microsoft-healthcare-madison team page (and update all links).
+  * Convert this section into github issues for work tracking and assignment (if anyone else is interested in helping)
+
+### Supporting materials
+  * I need to write a dumb local 'fhir' server which will serve up canned / static files on port 2019.
+
+### Remaining sections / exercises
+  * Populate Location
+  * Populate Admit date
+  * Populate Last Visited timestamp.
+  * Populate PCP and Attending providers.
+  * Populate Chief Complaint.
+
+### Bonus
+Finally, once the mechanics are better understood, the option of having a Questionnaire and response suggested in the Group extensions should be explored in the codelab.
