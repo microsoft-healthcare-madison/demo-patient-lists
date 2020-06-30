@@ -2,7 +2,8 @@
 <html lang="en">
 
 <script>
-  var SERVER = "http://localhost:2019"
+//  var SERVER = "http://localhost:2019"
+  var SERVER = "http://hapi.fhir.org/baseR4"
 </script>
 
 <head>
@@ -25,31 +26,124 @@
             <th>Attending</th>
         </tr>
     </table>
+    <script type='module' src='./node_modules/moment/src/moment.js'></script>
     <script>
-      console.log(SERVER);
-        fetch('data/person.json')
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (bundle) {
-                unbundle(bundle);
-            })
-            .catch(function (err) {
-                console.log('error: ' + err);
-            });
+        console.log(SERVER);  // XXX
 
-        function unbundle(bundle) {
+        // TODO: add any other contraints to the Group query here...
+        fetch(SERVER + '/Group?type=person')
+            .then(jsonify)
+            .then(get_groups)
+            .then(get_patients)
+            .then(render)
+            .catch(console.error);
+
+        function jsonify(response) {
+            return response.json();
+        }
+
+        function is_active(group) {
+            if ('active' in group.resource) {
+                return group.resource.active;
+            }
+            return true;
+        }
+
+        async function get_groups(bundle) {
+            const entities = [];
+            await fetch_all(bundle, entities);
+            const groups = entities.flat().filter(is_active);
+
+            // Resolve all 'descriptive' groups to 'actual'
+            for (var i = 0, x = groups.length; i < x; i++) {
+                const group = groups[i];
+                if (!group.actual) {
+                    console.log('TODO: NEED TO RESOLVE DESCRIPTIVE GROUP', group);
+                    // TODO: update the group in-place with the resolved instance.
+                    // groups[i] = group.resolve();  // TODO: something like this.
+                }
+            }
+
+            return groups;
+        }
+
+        // Copies all entries from a Bundle by recursively fetching all 'next' links until done.
+        async function fetch_all(bundle, entries) {
+            entries.push(bundle.entry);
+            const next = bundle.link.find(x => x.relation === 'next');
+            if (next) {
+                await fetch(next.url)
+                    .then(jsonify)
+                    .then(async function (next_bundle) {
+                        await fetch_all(next_bundle, entries);
+                    })
+                    .catch(console.error);
+            }
+        }
+
+        async function get_patients(groups) {
+            // Start by finding the set of unique patient references among all found groups.
+            const patients = new Map();
+            for (var i = 0; i < groups.length; i++) {
+                const members = groups[i].resource.member || [];
+                for (var j = 0; j < members.length; j++) {
+                    const id = members[j].entity.reference;
+                    if (id) {
+                        patients.set(id);
+                    }
+                }
+            }
+
+            // Resolve all patient references to resources before returning.
+            for (var reference of patients.keys()) {
+                patients.set(
+                    reference,
+                    fetch(SERVER + "/" + reference)
+                        .then(jsonify)
+                        .catch(console.error)
+                );
+            }
+
+            // Resolve all promises, leaving the resource objects in the rval.
+            const rval = [];
+            for (var patient of patients.values()) {
+                rval.push(await patient);
+            }
+            return rval;
+        }
+
+        function get_name(patient) {
+            if (!'name' in patient || !patient.name) {
+                return 'UNKNOWN NAME (id=' + patient.id + ')';
+            }
+            console.log(patient)
+            return patient.name[0].family + ", " + patient.name[0].given.join(" ");
+        }
+
+        function get_patient_display_data(patient) {
+            const rval = []
+            rval.push(get_name(patient));
+            // TODO: return an array of items to put into a table.
+            rval.push("");
+            rval.push(patient.gender);
+            return rval;
+        }
+
+        function render(patient_list) {
             var patients = document.getElementById("patients");
-            console.log(bundle)  // XXX
-            for (var i = 0; i < bundle.entry.length; i++) {
+            for (var i = 0; i < patient_list.length; i++) {
+                const data = get_patient_display_data(patient_list[i]);
                 var tr = document.createElement("tr");
-                var td = document.createElement("td");
-                tr.appendChild(td);
-                td.innerHTML = "Lastname, Firstname";
-                // TODO: add the other elements.
+                for (const text of data) {
+                    const td = document.createElement("td");
+                    td.innerHTML = text;
+                    tr.appendChild(td);
+                }
                 patients.appendChild(tr);
             }
         }
+
+
     </script>
 </body>
 </html>
