@@ -34,8 +34,8 @@
         // TODO: add any other contraints to the Group query here...
         fetch(SERVER + '/Group?type=person')
             .then(jsonify)
-            .then(get_groups)
-            .then(get_patients)
+            .then(getGroups)
+            .then(getPatients)
             .then(render)
             .catch(console.error);
 
@@ -43,17 +43,17 @@
             return response.json();
         }
 
-        function is_active(group) {
+        function isActive(group) {
             if ('active' in group.resource) {
                 return group.resource.active;
             }
             return true;
         }
 
-        async function get_groups(bundle) {
+        async function getGroups(bundle) {
             const entities = [];
-            await fetch_all(bundle, entities);
-            const groups = entities.flat().filter(is_active);
+            await fetchAll(bundle, entities);
+            const groups = entities.flat().filter(isActive);
 
             // Resolve all 'descriptive' groups to 'actual'
             for (var i = 0, x = groups.length; i < x; i++) {
@@ -69,20 +69,20 @@
         }
 
         // Copies all entries from a Bundle by recursively fetching all 'next' links until done.
-        async function fetch_all(bundle, entries) {
+        async function fetchAll(bundle, entries) {
             entries.push(bundle.entry);
             const next = bundle.link.find(x => x.relation === 'next');
             if (next) {
                 await fetch(next.url)
                     .then(jsonify)
-                    .then(async function (next_bundle) {
-                        await fetch_all(next_bundle, entries);
+                    .then(async function (nextBundle) {
+                        await fetchAll(nextBundle, entries);
                     })
                     .catch(console.error);
             }
         }
 
-        async function get_patients(groups) {
+        async function getPatients(groups) {
             // Start by finding the set of unique patient references among all found groups.
             const patients = new Map();
             for (var i = 0; i < groups.length; i++) {
@@ -113,7 +113,7 @@
             return rval;
         }
 
-        function get_name(patient) {
+        function getName(patient) {
             if (!'name' in patient || !patient.name) {
                 return 'UNKNOWN NAME (id=' + patient.id + ')';
             }
@@ -121,19 +121,19 @@
             return patient.name[0].family + ", " + patient.name[0].given.join(" ");
         }
 
-        function get_patient_display_data(patient) {
+        function getPatientDisplayData(patient) {
             const rval = []
-            rval.push(get_name(patient));
+            rval.push(getName(patient));
             // TODO: return an array of items to put into a table.
             rval.push("");
             rval.push(patient.gender);
             return rval;
         }
 
-        function render(patient_list) {
+        function render(patientList) {
             var patients = document.getElementById("patients");
-            for (var i = 0; i < patient_list.length; i++) {
-                const data = get_patient_display_data(patient_list[i]);
+            for (var i = 0; i < patientList.length; i++) {
+                const data = getPatientDisplayData(patientList[i]);
                 var tr = document.createElement("tr");
                 for (const text of data) {
                     const td = document.createElement("td");
