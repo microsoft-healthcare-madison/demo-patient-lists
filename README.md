@@ -4,4 +4,4 @@ A demonstration app and codelab companion to interactively teach developers how 
 
 # Codelab
 
-The codelab is hosted on GitHub pages at: <https://barabo.github.io/demo-patient-lists>
+The codelab is hosted on GitHub pages at: <https://microsoft-healthcare-madison.github.io/demo-patient-lists>
