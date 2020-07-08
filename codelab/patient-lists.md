@@ -8,22 +8,6 @@ tags: patient-lists fhir argonaut
 authors: Carl Anderson
 
 <!--- DEV NOTE
-# Run this in a terminal to automatically re-extract the codelab when the source
-# markdown is changed.
-
-# Prerequisites:
-#  - claat: https://github.com/googlecodelabs/tools/tree/master/claat
-#  - kqwait: https://github.com/sschober/kqwait (optional)
-
-# Serve the codelab html from the current 'docs' dir on port 9090.
-cd docs
-claat serve &  # opens a new browser window
-cd ..
-
-# Watch the codelab markdown for saves, exporting on each change.
-CODELAB=./codelab/patient-lists.md
-while kqwait $CODELAB && claat export $_; do continue; done
-
 # To PRINT a codelab, refer to Marc Cohen's post here:
 # https://groups.google.com/d/msg/codelab-authors/pnnY50o82Qw/V0PILK9iBQAJ
 
