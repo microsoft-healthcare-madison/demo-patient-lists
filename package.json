@@ -4,6 +4,7 @@
   "description": "A demo hospital rounds app using the FHIR Patient Lists API.",
   "main": "index.html",
   "scripts": {
+    "codelab": "bash bin/codelab-builder.sh",
     "demo": "http-server -p 2020 -a localhost -o ./index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
