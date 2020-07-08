@@ -3,7 +3,7 @@ id: docs
 categories: patient-lists argonaut
 environments: Web
 status: Draft
-feedback link: https://github.com/barabo/demo-patient-lists/issues
+feedback link: https://github.com/microsoft-healthcare-madison/demo-patient-lists/issues
 tags: patient-lists fhir argonaut
 authors: Carl Anderson
 
@@ -122,12 +122,12 @@ The table below shows one example list of patient data that might be displayed i
 Duration: 10
 
 ### Instructions
-Begin by cloning the [repository](https://github.com/barabo/demo-patient-lists) that contains the skeletal app and installing it locally on your machine.
+Begin by cloning the [repository](https://github.com/microsoft-healthcare-madison/demo-patient-lists) that contains the skeletal app and installing it locally on your machine.
 
 ```bash
 mkdir -p ~/code/msft-fhir
 cd $_
-git clone git@github.com:barabo/demo-patient-lists.git
+git clone git@github.com:microsoft-healthcare-madison/demo-patient-lists.git
 cd demo-patient-lists
 npm ci
 ```
