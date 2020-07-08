@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-06-25T14:06:46-05:00",
+  "updated": "2020-07-08T02:01:52-05:00",
   "id": "docs",
   "duration": 31,
   "title": "Build a Hospital Rounds App using the Patient Lists API",
@@ -21,6 +21,6 @@
     "patient-lists fhir argonaut",
     "web"
   ],
-  "feedback": "https://github.com/barabo/demo-patient-lists/issues",
+  "feedback": "https://github.com/microsoft-healthcare-madison/demo-patient-lists/issues",
   "url": "docs"
 }
