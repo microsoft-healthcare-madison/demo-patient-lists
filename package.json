@@ -6,6 +6,7 @@
   "scripts": {
     "codelab": "bash bin/codelab-builder.sh",
     "demo": "http-server -p 2020 -a localhost -o ./index.html",
+    "lint": "eslint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,10 @@
     "http-server": "^0.12.3",
     "moment": "^2.27.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-html": "^6.0.2",
+    "eslint-plugin-import": "^2.22.0"
+  }
 }

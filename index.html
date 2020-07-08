@@ -1,150 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<script>
-//  var SERVER = "http://localhost:2019"
-  var SERVER = "http://hapi.fhir.org/baseR4"
-//  SERVER = "https://prototype-erp-fhir.azurewebsites.net"
-</script>
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Patient Lists API Demo</title>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Patient Lists API Demo</title>
 </head>
 <body>
-    <table id="patients" border=1>
-        <tr>
-            <th>Patient</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Location</th>
-            <th>Last Visit</th>
-            <th>Admin</th>
-            <th>Chief Complaint</th>
-            <th>PCP</th>
-            <th>Attending</th>
-        </tr>
-    </table>
-    <script type='module' src='./node_modules/moment/src/moment.js'></script>
-    <script>
-        console.log(SERVER);  // XXX
+  <table id='patients' border=1>
+    <tr>
+      <th>Patient</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Location</th>
+      <th>Last Visit</th>
+      <th>Admin</th>
+      <th>Chief Complaint</th>
+      <th>PCP</th>
+      <th>Attending</th>
+    </tr>
+  </table>
+  <script type='module' src='./node_modules/moment/src/moment.js'></script>
+  <script>
+    const SERVER = 'http://hapi.fhir.org/baseR4';
 
-        // TODO: add any other contraints to the Group query here...
-        fetch(SERVER + '/Group?type=person')
+    function jsonify(response) {
+      return response.json();
+    }
+
+    function isActive(group) {
+      if ('active' in group.resource) {
+        return group.resource.active;
+      }
+      return true;
+    }
+
+    // Copies all entries from a Bundle by recursively fetching all 'next' links until done.
+    async function fetchAll(bundle, entries) {
+      entries.push(bundle.entry);
+      const next = bundle.link.find((x) => x.relation === 'next');
+      if (next) {
+        await fetch(next.url)
+          .then(jsonify)
+          .then(async (nextBundle) => {
+            await fetchAll(nextBundle, entries);
+          })
+          .catch(console.error);
+      }
+    }
+
+    async function getGroups(bundle) {
+      const entities = [];
+      await fetchAll(bundle, entities);
+      const groups = entities.flat().filter(isActive);
+
+      // Resolve all 'descriptive' groups to 'actual'
+      for (let i = 0, x = groups.length; i < x; i += 1) {
+        const group = groups[i];
+        if (!group.actual) {
+          console.log('TODO: NEED TO RESOLVE DESCRIPTIVE GROUP', group);
+          // TODO: update the group in-place with the resolved instance.
+          // groups[i] = group.resolve();  // TODO: something like this.
+        }
+      }
+
+      return groups;
+    }
+
+    async function getPatients(groups) {
+      // Start by finding the set of unique patient references among all found groups.
+      const patients = new Map();
+      for (let i = 0; i < groups.length; i += 1) {
+        const members = groups[i].resource.member || [];
+        for (let j = 0; j < members.length; j += 1) {
+          const id = members[j].entity.reference;
+          if (id) {
+            patients.set(id);
+          }
+        }
+      }
+
+      // Resolve all patient references to resources before returning.
+      patients.keys().map((reference) => {
+        patients.set(
+          reference,
+          fetch(`${SERVER}/${reference}`)
             .then(jsonify)
-            .then(getGroups)
-            .then(getPatients)
-            .then(render)
-            .catch(console.error);
+            .catch(console.error),
+        );
+        return true;
+      });
 
-        function jsonify(response) {
-            return response.json();
-        }
+      // Resolve all promises, leaving the resource objects in the rval.
+      const rval = [];
+      patients.values().map(async (patient) => {
+        rval.push(await patient);
+        return true;
+      });
+      return rval;
+    }
 
-        function isActive(group) {
-            if ('active' in group.resource) {
-                return group.resource.active;
-            }
-            return true;
-        }
+    function getName(patient) {
+      if (!patient.name || !patient.name) {
+        return `UNKNOWN NAME (id=${patient.id})`;
+      }
+      return `${patient.name[0].family}, ${patient.name[0].given.join(' ')}`;
+    }
 
-        async function getGroups(bundle) {
-            const entities = [];
-            await fetchAll(bundle, entities);
-            const groups = entities.flat().filter(isActive);
+    function getPatientDisplayData(patient) {
+      const rval = [];
+      rval.push(getName(patient));
+      // TODO: return an array of items to put into a table.
+      rval.push('');
+      rval.push(patient.gender);
+      return rval;
+    }
 
-            // Resolve all 'descriptive' groups to 'actual'
-            for (var i = 0, x = groups.length; i < x; i++) {
-                const group = groups[i];
-                if (!group.actual) {
-                    console.log('TODO: NEED TO RESOLVE DESCRIPTIVE GROUP', group);
-                    // TODO: update the group in-place with the resolved instance.
-                    // groups[i] = group.resolve();  // TODO: something like this.
-                }
-            }
+    function render(patientList) {
+      const patients = document.getElementById('patients');
+      for (let i = 0; i < patientList.length; i += 1) {
+        const data = getPatientDisplayData(patientList[i]);
+        const tr = document.createElement('tr');
+        data.map((text) => {
+          const td = document.createElement('td');
+          td.innerHTML = text;
+          tr.appendChild(td);
+          return true;
+        });
+        patients.appendChild(tr);
+      }
+    }
 
-            return groups;
-        }
-
-        // Copies all entries from a Bundle by recursively fetching all 'next' links until done.
-        async function fetchAll(bundle, entries) {
-            entries.push(bundle.entry);
-            const next = bundle.link.find(x => x.relation === 'next');
-            if (next) {
-                await fetch(next.url)
-                    .then(jsonify)
-                    .then(async function (nextBundle) {
-                        await fetchAll(nextBundle, entries);
-                    })
-                    .catch(console.error);
-            }
-        }
-
-        async function getPatients(groups) {
-            // Start by finding the set of unique patient references among all found groups.
-            const patients = new Map();
-            for (var i = 0; i < groups.length; i++) {
-                const members = groups[i].resource.member || [];
-                for (var j = 0; j < members.length; j++) {
-                    const id = members[j].entity.reference;
-                    if (id) {
-                        patients.set(id);
-                    }
-                }
-            }
-
-            // Resolve all patient references to resources before returning.
-            for (var reference of patients.keys()) {
-                patients.set(
-                    reference,
-                    fetch(SERVER + "/" + reference)
-                        .then(jsonify)
-                        .catch(console.error)
-                );
-            }
-
-            // Resolve all promises, leaving the resource objects in the rval.
-            const rval = [];
-            for (var patient of patients.values()) {
-                rval.push(await patient);
-            }
-            return rval;
-        }
-
-        function getName(patient) {
-            if (!'name' in patient || !patient.name) {
-                return 'UNKNOWN NAME (id=' + patient.id + ')';
-            }
-            console.log(patient)
-            return patient.name[0].family + ", " + patient.name[0].given.join(" ");
-        }
-
-        function getPatientDisplayData(patient) {
-            const rval = []
-            rval.push(getName(patient));
-            // TODO: return an array of items to put into a table.
-            rval.push("");
-            rval.push(patient.gender);
-            return rval;
-        }
-
-        function render(patientList) {
-            var patients = document.getElementById("patients");
-            for (var i = 0; i < patientList.length; i++) {
-                const data = getPatientDisplayData(patientList[i]);
-                var tr = document.createElement("tr");
-                for (const text of data) {
-                    const td = document.createElement("td");
-                    td.innerHTML = text;
-                    tr.appendChild(td);
-                }
-                patients.appendChild(tr);
-            }
-        }
-
-
-    </script>
+    // TODO: add any other contraints to the Group query here...
+    fetch(`${SERVER}/Group?type=person`)
+      .then(jsonify)
+      .then(getGroups)
+      .then(getPatients)
+      .then(render)
+      .catch(console.error);
+  </script>
 </body>
 </html>
